@@ -1,0 +1,36 @@
+.container main {
+  padding: 1rem;
+  background-color: azure;
+}
+
+.nextGame {
+  border: 0.5px solid #ffccc7;
+  padding: 1rem;
+}
+
+.next {
+  background-color: #ff4d4f;
+  padding: 0.2rem;
+}
+.next span {
+  color: #fff;
+  font-size: 20px;
+  padding: 1rem;
+}
+
+.centralizeImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid #fff;
+}
+
+.header {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+.header > div {
+  width: 100%;
+}
