@@ -1,4 +1,10 @@
 use anchor_lang::prelude::*;
+use anchor_spl::{
+    self,
+    associated_token::AssociatedToken,
+    token::{self, Mint, Token, TokenAccount},
+};
+use rand::{thread_rng, Rng};
 
 declare_id!("HHJgVhndgFHUF6BrtnFuSJir4BVLt4TSb6mEzPivsxDJ");
 
@@ -21,6 +27,13 @@ pub mod first {
         base_account.data_list.push(copy);
         Ok(())
     }
+
+    /* pub fn pickRandomRarity(range: u8) -> Rarity {
+        let mut rng = thread_rng();
+        let value = rng.gen() % 10000;
+        for elem in iter {
+        }
+    } */
 }
 
 #[derive(Accounts)]
@@ -42,4 +55,36 @@ pub struct Update<'info> {
 pub struct BaseAccount {
     pub data: String,
     pub data_list: Vec<String>,
+}
+
+pub enum Rarity {
+    Common,
+    Uncommon,
+    Rare,
+    Master,
+    Legendary,
+}
+
+pub enum Position {
+    Goalkeeper,
+    Defenser,
+    Middle,
+    Forward,
+}
+
+pub enum Feet {
+    Left,
+    Right,
+}
+
+pub struct Player {
+    pub name: String,
+    pub rariry: Rarity,
+    pub inteligence: u8,
+    pub speed: u8,
+    pub stamina: u8,
+    pub strength: u8,
+    pub feed: Feet,
+    pub age: u8,
+    pub mint_wallet: String,
 }
