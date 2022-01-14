@@ -7,7 +7,7 @@ import {
   TeamOutlined,
 } from '@ant-design/icons'
 import { Route, Routes } from 'react-router-dom'
-import { useAnchorWallet } from '@solana/wallet-adapter-react'
+import { useAnchorWallet, useWallet } from '@solana/wallet-adapter-react'
 import {
   WalletModalProvider,
   WalletDisconnectButton,
@@ -17,11 +17,11 @@ import Home from 'pages/Home'
 import { Vacas } from 'pages/Vacas'
 
 export const AppRoutes = () => {
-  const wallet = useAnchorWallet()
+  const wallet = useWallet()
   const [address, setAddress] = useState('')
 
   useEffect(() => {
-    if (wallet) {
+    if (wallet.connected && wallet.publicKey) {
       setAddress(wallet.publicKey.toString())
     }
   }, [wallet])
@@ -56,17 +56,9 @@ export const AppRoutes = () => {
       <Layout>
         <Layout.Header className='header'>
           <Row justify='end' align='middle'>
-            <Col>
-              {address ? (
-                <div>
-                  <p>Wallet Address: {address}</p>
-                </div>
-              ) : (
-                <WalletModalProvider>
-                  <WalletMultiButton />
-                </WalletModalProvider>
-              )}
-            </Col>
+            <WalletModalProvider>
+              <WalletMultiButton />
+            </WalletModalProvider>
           </Row>
         </Layout.Header>
         <Layout.Content
